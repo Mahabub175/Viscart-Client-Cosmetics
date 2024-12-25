@@ -195,7 +195,7 @@ const LandingTopHeader = () => {
   );
 
   return (
-    <div className="md:flex items-center justify-between container mx-auto px-5">
+    <div className="md:flex items-center justify-between container mx-auto gap-5 px-5 py-0 lg:py-2 xl:py-0">
       <div className="flex flex-col md:flex-row items-center gap-10">
         <Link href={"/"}>
           <Image
@@ -263,7 +263,7 @@ const LandingTopHeader = () => {
             </Link>
             <Link
               href={"/sign-up"}
-              className="flex items-center gap-2 text-black "
+              className="hidden lg:flex items-center gap-2 text-black "
             >
               <Button type="primary" className="!px-6 !py-4 !font-bold">
                 Sign Up
