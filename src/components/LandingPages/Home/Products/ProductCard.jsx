@@ -14,7 +14,7 @@ const ProductCard = ({ item }) => {
 
   return (
     <div
-      className="border hover:border-primary duration-300 rounded-xl shadow-xl relative group w-[170px] h-[310px] lg:w-[230px] lg:h-[400px] mx-auto bg-white"
+      className="border hover:border-primary duration-300 rounded-xl shadow-xl relative group w-[170px] h-[330px] lg:w-[230px] lg:h-[400px] mx-auto bg-white flex flex-col justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -28,7 +28,7 @@ const ProductCard = ({ item }) => {
         </div>
       )}
 
-      <div className="relative overflow-hidden rounded-t-xl">
+      <div className="relative overflow-hidden rounded-t-xl flex-shrink-0 h-[160px] lg:h-[200px]">
         {item?.video && isHovered ? (
           <video
             src={formatImagePath(item?.video)}
@@ -38,7 +38,7 @@ const ProductCard = ({ item }) => {
             autoPlay
             muted
             controls={false}
-            className="w-full h-[160px] lg:h-[220px] rounded-t-xl object-cover"
+            className="w-full h-full rounded-t-xl object-cover"
           >
             Your browser does not support the video tag.
           </video>
@@ -52,49 +52,49 @@ const ProductCard = ({ item }) => {
             alt={item?.name}
             width={230}
             height={220}
-            className="rounded-t-xl w-[185px] md:w-full h-[160px] lg:h-[220px] group-hover:scale-110 duration-500"
+            className="rounded-t-xl h-[200px] object-cover group-hover:scale-110 duration-500"
           />
         )}
 
         <div className="hidden lg:block absolute inset-x-0 bottom-0 transform translate-y-full group-hover:translate-y-0 duration-500 z-10">
           <QuickViewHover item={item} />
         </div>
-        <div className="lg:hidden">
-          <QuickViewHover item={item} />
-        </div>
+      </div>
+      <div className="lg:hidden">
+        <QuickViewHover item={item} />
       </div>
 
-      <div className="bg-white px-3 lg:p-5 rounded-b-xl">
-        <div className="lg:flex justify-center items-center mb-2 gap-4 font-bold hidden">
-          <Rate disabled value={item?.ratings?.average} allowHalf />
-        </div>
-        <LinkButton href={`/products/${item?.slug}`}>
+      <div className="bg-white flex-grow">
+        <div className="px-3 lg:p-5">
+          <div className="lg:flex justify-center items-center mb-2 gap-4 font-bold hidden">
+            <Rate disabled value={item?.ratings?.average} allowHalf />
+          </div>
           <Tooltip placement="top" title={item?.name}>
-            <h2 className="text-base text-center lg:font-semibold lg:mt-2 mb-6">
+            <h2 className="text-[14px] md:text-base text-center lg:font-semibold lg:mt-2 mb-6">
               {item?.name.length > 40
                 ? item.name.slice(0, 40).concat("...")
                 : item.name}
             </h2>
           </Tooltip>
-
           <div className="flex items-center gap-2 lg:gap-4 justify-center text-center">
             {item?.offerPrice && (
               <p className="text-sm lg:text-base font-bold line-through text-red-500">
                 {globalData?.results?.currency + " " + item?.sellingPrice}
               </p>
             )}
-            {item?.offerPrice ? (
-              <p className="text-primary text-sm lg:text-xl font-bold">
-                {globalData?.results?.currency + " " + item?.offerPrice}
-              </p>
-            ) : (
-              <p className="text-primary text-sm lg:text-xl font-bold">
-                {globalData?.results?.currency + " " + item?.sellingPrice}
-              </p>
-            )}
+            <p className="text-primary text-sm lg:text-xl font-bold">
+              {globalData?.results?.currency +
+                " " +
+                (item?.offerPrice || item?.sellingPrice)}
+            </p>
           </div>
-        </LinkButton>
+        </div>
       </div>
+      <LinkButton href={`/products/${item?.slug}`}>
+        <button className="bg-primary py-1 text-white w-full rounded-b-xl -mt-4">
+          Details
+        </button>
+      </LinkButton>
     </div>
   );
 };
