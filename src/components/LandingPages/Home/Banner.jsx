@@ -19,7 +19,7 @@ const Banner = () => {
   );
 
   return (
-    <section className="relative">
+    <section className="relative mb-10p">
       <Swiper
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;

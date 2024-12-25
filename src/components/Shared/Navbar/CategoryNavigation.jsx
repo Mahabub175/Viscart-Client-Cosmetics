@@ -59,13 +59,12 @@ const CategoryNavigation = ({ onClose }) => {
           key={parentCategory?._id}
           overlay={renderCategories(parentCategory)}
           trigger={["hover"]}
-          className="mr-4"
         >
           <Link
             href={`/products?filter=${parentCategory?.name}`}
             className="flex items-center cursor-pointer"
           >
-            <span className="mr-2">{parentCategory?.name}</span>
+            <span>{parentCategory?.name}</span>
             {parentCategory?.categories &&
               parentCategory?.categories.length > 0 && (
                 <DownOutlined className="!text-sm" />
@@ -76,7 +75,7 @@ const CategoryNavigation = ({ onClose }) => {
   };
 
   const routes = (
-    <div className="flex flex-col text-sm lg:text-base md:flex-row md:items-center gap-10">
+    <div className="flex flex-col text-sm lg:text-base md:flex-row md:items-center gap-5">
       {[
         {
           name: "All Products",

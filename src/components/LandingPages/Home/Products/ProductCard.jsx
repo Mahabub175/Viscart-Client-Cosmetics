@@ -14,7 +14,7 @@ const ProductCard = ({ item }) => {
 
   return (
     <div
-      className="border hover:border-primary duration-300 rounded-xl shadow-xl relative group w-[170px] h-[330px] lg:w-[230px] lg:h-[400px] mx-auto bg-white flex flex-col justify-between"
+      className="border hover:border-primary duration-300 rounded-xl shadow-xl relative group w-[170px] h-[325px] lg:w-[230px] lg:h-[400px] mx-auto bg-white flex flex-col justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

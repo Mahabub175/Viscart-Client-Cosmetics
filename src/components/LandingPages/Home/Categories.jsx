@@ -22,22 +22,22 @@ const Categories = () => {
       <h2 className="text-2xl lg:text-4xl font-bold text-center">
         Top Categories
       </h2>
-      <div className="mt-10 hidden md:grid md:grid-cols-3 lg:grid-cols-5 gap-10">
+      <div className="mt-10 hidden md:grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-10">
         {activeCategories?.slice(0, 9).map((category) => (
           <Link
             href={`/products?filter=${category?.name}`}
             key={category?._id}
             className="text-center relative"
           >
-            <div className="group cursor-pointer overflow-hidden w-[260px] h-[260px] rounded-xl mx-auto">
+            <div className="group cursor-pointer overflow-hidden w-[250px] h-[250px] rounded-xl mx-auto">
               <Image
                 src={
                   category?.attachment ??
                   "https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
                 }
                 alt={category?.name}
-                width={260}
-                height={260}
+                width={250}
+                height={250}
                 className="group-hover:scale-110 duration-500 object-cover rounded-xl"
               />
             </div>
