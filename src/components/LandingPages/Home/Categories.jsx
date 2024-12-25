@@ -18,7 +18,7 @@ const Categories = () => {
   );
 
   return (
-    <section className="-mt-10 lg:-mt-0 py-10 relative my-container bg-white shadow-xl p-5 rounded-xl">
+    <section className="py-10 relative my-container bg-white shadow-xl p-5 rounded-xl">
       <h2 className="text-2xl lg:text-4xl font-bold text-center">
         Top Categories
       </h2>
