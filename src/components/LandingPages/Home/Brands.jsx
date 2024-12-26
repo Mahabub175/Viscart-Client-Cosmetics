@@ -25,15 +25,13 @@ const Brands = () => {
 
   return (
     <section className="my-container bg-white shadow-xl p-5 rounded-xl mt-10">
-      <h2 className="text-2xl lg:text-4xl font-bold text-center mb-10">
-        Our Brands
-      </h2>
+      <h2 className="text-2xl font-medium text-center mb-10">Our Brands</h2>
       {activeBrands?.length === 0 ? (
         <p className="text-center my-5">
           There is no brands available right now
         </p>
       ) : (
-        <div className="relative">
+        <div className="relative lg:py-32">
           <Swiper
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
@@ -76,13 +74,13 @@ const Brands = () => {
           </Swiper>
           <div className="flex items-center justify-between gap-5 mt-10">
             <button
-              className="z-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-transparent text-primary border border-primary hover:bg-primary hover:text-white duration-300 absolute top-[40%] left-0"
+              className="z-10 lg:w-6 lg:h-6 flex items-center justify-center rounded-full bg-white text-primary border border-primary hover:bg-primary hover:text-white duration-300 absolute top-[35%] lg:top-[45%] left-0"
               onClick={() => swiperRef.current.slidePrev()}
             >
               <FaAngleLeft className="text-xl" />
             </button>
             <button
-              className="z-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-transparent text-primary border border-primary hover:bg-primary hover:text-white duration-300 absolute top-[40%] right-0"
+              className="z-10 lg:w-6 lg:h-6 flex items-center justify-center rounded-full bg-white text-primary border border-primary hover:bg-primary hover:text-white duration-300 absolute top-[35%] lg:top-[45%] right-0"
               onClick={() => swiperRef.current.slideNext()}
             >
               <FaAngleRight className="text-xl" />

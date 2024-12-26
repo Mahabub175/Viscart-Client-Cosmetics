@@ -108,7 +108,19 @@ const LandingHeader = () => {
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between px-5 py-2">
         <Link href={"/"}>Hotline: {globalData?.results?.businessWhatsapp}</Link>
         <div className="flex items-center gap-4">
-          <Link href={"/contact"}>Contact Us</Link>
+          <Link
+            href={"/sign-in"}
+            className="hover:underline hover:text-primary duration-300"
+          >
+            Sign In
+          </Link>
+          <div>|</div>
+          <Link
+            href={"/contact"}
+            className="hover:underline hover:text-primary duration-300"
+          >
+            Contact Us
+          </Link>
           <div>|</div>
           <div className="flex items-center gap-4">
             <Link
@@ -186,7 +198,7 @@ const LandingHeader = () => {
 
   return (
     <header>
-      <nav className="mb-5">
+      <nav className="-mb-[1px]">
         {isMobile ? (
           <>
             {top}

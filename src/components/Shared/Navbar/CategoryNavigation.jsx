@@ -92,8 +92,8 @@ const CategoryNavigation = ({ onClose }) => {
           onClick={onClose}
           className={`flex flex-col lg:items-center duration-300 ${
             pathname === item.link
-              ? "text-primary hover:text-primary"
-              : "text-black hover:text-primary"
+              ? "text-white hover:text-white"
+              : "text-white hover:text-white"
           }`}
         >
           <span>{item.name}</span>
@@ -103,7 +103,7 @@ const CategoryNavigation = ({ onClose }) => {
   );
 
   return (
-    <div className="bg-white py-3 lg:text-black lg:border-y mb-5">
+    <div className="lg:bg-primary py-3 lg:text-white lg:border-y">
       <div className="container lg:px-5 mx-auto flex flex-col md:flex-row gap-5 items-start md:items-center">
         {renderParentCategories()}
         <span className="rotate-90 md:rotate-0">|</span>

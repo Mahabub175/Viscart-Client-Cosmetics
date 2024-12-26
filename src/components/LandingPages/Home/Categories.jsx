@@ -19,30 +19,30 @@ const Categories = () => {
 
   return (
     <section className="py-10 relative my-container bg-white shadow-xl p-5 rounded-xl">
-      <h2 className="text-2xl lg:text-4xl font-bold text-center">
-        Top Categories
+      <h2 className="text-2xl font-medium text-center">
+        Find Your Items By Category
       </h2>
-      <div className="mt-10 hidden md:grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+      <div className="mt-10 hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:py-32">
         {activeCategories?.slice(0, 9).map((category) => (
           <Link
             href={`/products?filter=${category?.name}`}
             key={category?._id}
             className="text-center relative"
           >
-            <div className="group cursor-pointer overflow-hidden w-[250px] h-[250px] rounded-xl mx-auto">
+            <div className="group cursor-pointer overflow-hidden w-[300px] h-[300px] rounded-xl mx-auto">
               <Image
                 src={
                   category?.attachment ??
                   "https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
                 }
                 alt={category?.name}
-                width={250}
-                height={250}
-                className="group-hover:scale-110 duration-500 object-cover rounded-xl"
+                width={300}
+                height={300}
+                className="group-hover:scale-110 duration-500 object-cover rounded-xl mx-auto"
               />
             </div>
             <h3
-              className={`font-bold text-xl absolute bottom-6 left-1/2 transform -translate-x-1/2 ${
+              className={`font-semibold text-xl absolute bottom-6 left-0 right-0 ${
                 category?.attachment ? "text-white" : "text-primary"
               }`}
             >
