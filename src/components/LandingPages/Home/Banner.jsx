@@ -48,9 +48,9 @@ const Banner = () => {
                     "https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
                   }
                   alt={item?.name ?? "Demo"}
-                  width={450}
-                  height={450}
-                  className="h-[150px] lg:h-fit w-full"
+                  width={2000}
+                  height={600}
+                  className="h-[150px] lg:h-fit w-full object-cover"
                 />
               </LinkButton>
             </SwiperSlide>

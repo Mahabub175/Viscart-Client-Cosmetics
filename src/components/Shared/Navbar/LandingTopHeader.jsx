@@ -136,7 +136,7 @@ const LandingTopHeader = () => {
       <Link
         href={"/compare"}
         className={`flex flex-col items-center font-bold duration-30  border-2 rounded-xl p-2 text-xl bg-grey ${
-          pathname == "/cart"
+          pathname == "/v"
             ? "text-primary hover:text-primary"
             : "text-black hover:text-primary"
         }`}
@@ -155,7 +155,7 @@ const LandingTopHeader = () => {
       <Link
         href={"/wishlist"}
         className={`flex flex-col items-center font-bold duration-30  border-2 rounded-xl p-2 text-xl bg-grey ${
-          pathname == "/cart"
+          pathname == "/wishlist"
             ? "text-primary hover:text-primary"
             : "text-black hover:text-primary"
         }`}
