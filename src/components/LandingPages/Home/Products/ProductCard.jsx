@@ -48,7 +48,7 @@ const ProductCard = ({ item }) => {
 
   return (
     <div
-      className="border rounded-xl shadow-xl relative group w-[250px] lg:w-[360px] h-[550px] mx-auto bg-white flex flex-col justify-between"
+      className="border rounded-xl shadow-xl relative group w-[300px] lg:w-[360px] h-[500px] md:h-[530px] lg:h-[560px] mx-auto bg-white flex flex-col justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -76,39 +76,38 @@ const ProductCard = ({ item }) => {
             alt={item?.name}
             width={360}
             height={350}
-            className="rounded-t-xl w-[250px] lg:w-[360px] h-[350px] object-cover group-hover:scale-110 duration-500"
+            className="rounded-t-xl w-[300px] lg:w-[360px] h-[300px] lg:h-[350px] object-cover group-hover:scale-110 duration-500"
           />
         )}
       </div>
 
-      <div className="bg-white flex-grow">
-        <div className="px-3 lg:p-5">
-          <div className="flex flex-col justify-between items-center mb-2 gap-4">
+      <div className="bg-white flex-grow relative">
+        <div className="px-3 lg:p-4">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-2 gap-4 mt-2 lg:-mt-2">
             <Rate
               disabled
               value={item?.ratings?.average}
               allowHalf
-              style={{ fontSize: "12px" }}
-              className="mt-2 lg:mt-0"
+              style={{ fontSize: "14px" }}
             />
             <QuickViewHover item={item} />
           </div>
           <LinkButton href={`/products/${item?.slug}`}>
             <Tooltip placement="top" title={item?.name}>
               <h2 className="text-[14px] md:text-base text-center lg:mt-2 mb-6">
-                {item?.name.length > 40
-                  ? item.name.slice(0, 40).concat("...")
+                {item?.name.length > 50
+                  ? item.name.slice(0, 50).concat("...")
                   : item.name}
               </h2>
             </Tooltip>
           </LinkButton>
-          <div className="flex items-center gap-2 lg:gap-4 justify-center text-center">
+          <div className="flex items-center gap-2 lg:gap-4 justify-center text-center absolute  bottom-2 md:bottom-4 left-0 right-0">
             {item?.offerPrice && (
-              <p className="text-sm lg:text-base font-bold line-through text-red-500">
+              <p className="text-base font-bold line-through text-red-500">
                 {globalData?.results?.currency + " " + item?.sellingPrice}
               </p>
             )}
-            <p className="text-primary text-sm lg:text-xl font-bold">
+            <p className="text-primary text-xl font-bold">
               {globalData?.results?.currency +
                 " " +
                 (item?.offerPrice || item?.sellingPrice)}
@@ -121,13 +120,13 @@ const ProductCard = ({ item }) => {
         <div>
           {item?.isVariant ? (
             <LinkButton href={`/products/${item?.slug}`}>
-              <button className="bg-primary py-2 text-white w-full rounded-b-xl -mt-4">
+              <div className="bg-primary py-2 text-white w-full rounded-b-xl">
                 Details
-              </button>
+              </div>
             </LinkButton>
           ) : (
             <button
-              className="bg-primary text-white py-2 w-full rounded-b-xl -mt-4 cursor-pointer"
+              className="bg-primary text-white py-2 w-full rounded-b-xl cursor-pointer"
               onClick={addToCart}
             >
               Add to Cart
@@ -135,14 +134,12 @@ const ProductCard = ({ item }) => {
           )}
         </div>
       ) : (
-        <div>
-          <button
-            className="bg-grey text-red-500 py-2 w-full rounded-b-xl -mt-4"
-            disabled
-          >
-            Stock Out
-          </button>
-        </div>
+        <button
+          className="bg-grey text-red-500 py-2 w-full rounded-b-xl"
+          disabled
+        >
+          Stock Out
+        </button>
       )}
     </div>
   );

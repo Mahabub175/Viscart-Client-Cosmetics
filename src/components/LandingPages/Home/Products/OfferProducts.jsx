@@ -17,7 +17,7 @@ const OfferProducts = () => {
         Top Selling Products
       </h2>
       {activeProducts?.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8 lg:gap-y-14 pb-10">
+        <div className="flex flex-wrap gap-x-5 gap-y-8 lg:gap-y-14 pb-10">
           {activeProducts?.map((product) => (
             <ProductCard key={product?._id} item={product} />
           ))}

@@ -195,7 +195,7 @@ const AllProducts = ({ searchParams }) => {
         <div className="w-full">
           <div>
             {filteredProducts?.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5 lg:gap-10">
+              <div className="flex flex-wrap gap-x-5 gap-y-8 lg:gap-y-14 pb-10">
                 {filteredProducts?.map((product) => (
                   <ProductCard key={product?._id} item={product} />
                 ))}

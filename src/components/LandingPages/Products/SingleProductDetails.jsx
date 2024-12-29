@@ -155,8 +155,8 @@ const SingleProductDetails = ({ params }) => {
                 <Image
                   src={currentImage}
                   alt="product image"
-                  height={400}
-                  width={400}
+                  height={450}
+                  width={450}
                   className="mx-auto rounded-xl"
                 />
               </Zoom>
@@ -198,25 +198,25 @@ const SingleProductDetails = ({ params }) => {
             ))}
           </div>
         </div>
-        <div className="lg:w-1/2 flex flex-col gap-3 text-sm lg:text-lg">
-          <h2 className="text-2xl lg:text-4xl font-bold">
+        <div className="lg:w-1/2 flex flex-col text-sm lg:text-base">
+          <h2 className="text-xl md:text-3xl font-medium mb-2">
             {singleProduct?.name}
           </h2>
-          <div className="flex items-center gap-2">
-            <span className="font-bold">Category:</span>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="font-medium">Category:</span>
             <span>{singleProduct?.category?.name}</span>
           </div>
           {singleProduct?.brand && (
             <div className="flex items-center gap-2">
-              <span className="font-bold">Brand:</span>
+              <span className="font-medium">Brand:</span>
               <span>{singleProduct?.brand?.name}</span>
             </div>
           )}
-          <div className="flex items-center mt-4 gap-4 font-bold">
-            <Rate disabled value={singleProduct?.ratings?.average} allowHalf />({" "}
+          <div className="flex items-center mt-4 gap-4 font-medium">
+            <Rate disabled value={singleProduct?.ratings?.average} allowHalf />(
             {singleProduct?.ratings?.count})
           </div>
-          <div className="flex items-center gap-4 text-textColor font-bold my-2">
+          <div className="flex items-center gap-4 text-textColor font-medium my-2">
             Price:{" "}
             {singleProduct?.offerPrice ? (
               <p className="text-primary text-xl">
@@ -260,21 +260,21 @@ const SingleProductDetails = ({ params }) => {
           </div>
         </div>
       </div>
-      <div className="border-2 border-primary rounded-xl p-5 mb-10 shadow-xl bg-white flex flex-col items-center justify-center">
-        <div className="bg-primary mb-10 px-10 py-2 text-white font-bold rounded-xl inline-block">
+      <div className="border-2 border-primary rounded-xl p-5 mb-10 shadow-xl bg-white">
+        <div className="bg-primary mb-10 px-10 py-2 text-white font-medium rounded-lg inline-block">
           Description
         </div>
         <div
           dangerouslySetInnerHTML={{ __html: singleProduct?.description }}
         ></div>
       </div>
-      <div className="mt-20">
+      <div className="mt-20 bg-white rounded-xl shadow-xl p-5">
         {activeProducts && activeProducts.length > 0 ? (
           <>
-            <h2 className="text-xl lg:text-3xl font-bold mb-5 border-b pb-2 px-2">
+            <h2 className="text-xl md:text-3xl font-medium text-center mb-10">
               Similar Products
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-5 lg:gap-5">
+            <div className="flex flex-wrap gap-x-5 gap-y-8 lg:gap-y-14 pb-10">
               {activeProducts.map((product) => (
                 <ProductCard key={product._id} item={product} />
               ))}

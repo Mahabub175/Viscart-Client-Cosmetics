@@ -199,21 +199,21 @@ const SinglePageCart = ({ params }) => {
               ))}
             </div>
           </div>
-          <div className="lg:w-1/2 flex flex-col gap-3">
-            <h2 className="text-3xl lg:text-4xl font-bold">
+          <div className="lg:w-1/2 flex flex-col">
+            <h2 className="text-3xl lg:text-4xl font-medium mb-2">
               {singleProduct?.name}
             </h2>
-            <div className="flex items-center gap-2">
-              <span className="font-bold">Category:</span>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="font-medium">Category:</span>
               <span>{singleProduct?.category?.name}</span>
             </div>
             {singleProduct?.brand && (
               <div className="flex items-center gap-2">
-                <span className="font-bold">Brand:</span>
+                <span className="font-medium">Brand:</span>
                 <span>{singleProduct?.brand?.name}</span>
               </div>
             )}
-            <div className="flex items-center mt-4 gap-4 font-bold">
+            <div className="flex items-center mt-4 gap-4 font-medium">
               <Rate
                 disabled
                 value={singleProduct?.ratings?.average}
@@ -221,7 +221,7 @@ const SinglePageCart = ({ params }) => {
               />
               ({singleProduct?.ratings?.count})
             </div>
-            <div className="flex items-center gap-4 text-textColor font-bold my-2">
+            <div className="flex items-center gap-4 text-textColor font-medium my-2">
               Price:{" "}
               {singleProduct?.offerPrice ? (
                 <p className="text-primary text-xl">
