@@ -104,10 +104,10 @@ const LandingHeader = () => {
   }, []);
 
   const top = (
-    <div className="bg-white">
+    <div className="bg-white hidden md:block">
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between px-5 py-2">
         <Link href={"/"}>Hotline: {globalData?.results?.businessWhatsapp}</Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1 lg:gap-4">
           {!user && (
             <>
               <Link

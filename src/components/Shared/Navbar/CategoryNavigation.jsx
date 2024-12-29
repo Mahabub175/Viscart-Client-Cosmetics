@@ -2,11 +2,8 @@ import { useGetAllCategoriesQuery } from "@/redux/services/category/categoryApi"
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import { Menu, Dropdown } from "antd";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const CategoryNavigation = ({ onClose }) => {
-  const pathname = usePathname();
-
   const { data: categories } = useGetAllCategoriesQuery();
   const renderSubcategories = (category) => {
     if (category?.subcategories && category?.subcategories.length > 0) {
@@ -75,7 +72,7 @@ const CategoryNavigation = ({ onClose }) => {
   };
 
   const routes = (
-    <div className="flex flex-col text-sm lg:text-base md:flex-row md:items-center gap-5">
+    <div className="flex flex-col text-base md:flex-row md:items-center gap-5">
       {[
         {
           name: "All Products",
@@ -90,11 +87,7 @@ const CategoryNavigation = ({ onClose }) => {
           key={index}
           href={item.link}
           onClick={onClose}
-          className={`flex flex-col lg:items-center duration-300 ${
-            pathname === item.link
-              ? "text-white hover:text-white"
-              : "text-white hover:text-white"
-          }`}
+          className={`flex flex-col lg:items-center duration-300 `}
         >
           <span>{item.name}</span>
         </Link>
@@ -103,8 +96,8 @@ const CategoryNavigation = ({ onClose }) => {
   );
 
   return (
-    <div className="lg:bg-primary py-3 lg:text-white lg:border-y">
-      <div className="container lg:px-5 mx-auto flex flex-col md:flex-row gap-5 items-start md:items-center justify-center">
+    <div className="md:bg-primary py-3 md:text-white lg:border-y">
+      <div className="container lg:px-5 mx-auto flex flex-col md:flex-row flex-wrap gap-5 items-start md:items-center justify-center">
         {renderParentCategories()}
         <span className="rotate-90 md:rotate-0">|</span>
         {routes}

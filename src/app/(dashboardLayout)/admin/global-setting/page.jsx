@@ -72,10 +72,12 @@ const AdminAccountSetting = () => {
     setFields(transformDefaultValues(data?.results));
   }, [data]);
 
-  const currenciesOptions = currencies.map(({ name, symbol, code }) => {
-    return { label: `${name} (${symbol})`, value: code };
+  const currenciesOptions = currencies.map(({ name, symbol, symbolNative }) => {
+    return {
+      label: `${name} (${symbol}) ${symbolNative}`,
+      value: symbol,
+    };
   });
-
   return (
     <section className="w-4/6 mx-auto">
       <Divider orientation="left" orientationMargin={0}>

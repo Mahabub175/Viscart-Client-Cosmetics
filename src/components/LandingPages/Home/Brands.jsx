@@ -44,7 +44,8 @@ const Brands = () => {
             breakpoints={{
               640: { slidesPerView: 2 },
               768: { slidesPerView: 2 },
-              1024: { slidesPerView: 4 },
+              1024: { slidesPerView: 3 },
+              1100: { slidesPerView: 4 },
             }}
             navigation
             autoplay={{
