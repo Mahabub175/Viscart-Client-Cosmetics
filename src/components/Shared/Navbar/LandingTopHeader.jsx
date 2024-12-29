@@ -184,10 +184,10 @@ const LandingTopHeader = () => {
             <span className="absolute -top-2 -right-2 bg-primary text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
               {cartData?.length}
             </span>
-            <FaCartPlus />
+            <FaCartPlus className="cursor-pointer hover:text-primary duration-300" />
           </span>
         ) : (
-          <FaCartPlus />
+          <FaCartPlus className="cursor-pointer hover:text-primary duration-300" />
         )}
       </Link>
     </div>
