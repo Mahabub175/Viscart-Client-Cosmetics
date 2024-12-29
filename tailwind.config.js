@@ -16,7 +16,7 @@ module.exports = {
         grey: "#f1f1f1",
       },
       boxShadow: {
-        xl: "0 0 10px 5px #e5e5e5",
+        xl: "3px 3px 5px 3px #e5e5e5",
       },
       screens: {
         sm: "580px",

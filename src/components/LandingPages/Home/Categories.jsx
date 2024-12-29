@@ -19,25 +19,25 @@ const Categories = () => {
 
   return (
     <section className="py-10 relative my-container bg-white shadow-xl p-5 rounded-xl">
-      <h2 className="text-2xl font-medium text-center">
+      <h2 className="text-xl md:text-2xl font-medium text-center">
         Find Your Items By Category
       </h2>
-      <div className="mt-10 hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:py-32">
+      <div className="mt-10 hidden md:flex flex-wrap justify-center items-center gap-10 py-5">
         {activeCategories?.slice(0, 9).map((category) => (
           <Link
             href={`/products?filter=${category?.name}`}
             key={category?._id}
             className="text-center relative"
           >
-            <div className="group cursor-pointer overflow-hidden w-[300px] h-[300px] rounded-xl mx-auto">
+            <div className="group cursor-pointer overflow-hidden w-[350px] h-[350px] rounded-xl mx-auto">
               <Image
                 src={
                   category?.attachment ??
                   "https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
                 }
                 alt={category?.name}
-                width={300}
-                height={300}
+                width={350}
+                height={350}
                 className="group-hover:scale-110 duration-500 object-cover rounded-xl mx-auto"
               />
             </div>
@@ -77,22 +77,33 @@ const Categories = () => {
               }}
               className="mySwiper"
             >
-              {activeCategories?.map((item) => {
+              {activeCategories?.map((category) => {
                 return (
-                  <SwiperSlide key={item?._id}>
-                    <Link href={`/products?filter=${item?.name}`}>
-                      <div className="group cursor-pointer overflow-hidden w-[260px] h-[260px] rounded-xl mx-auto flex justify-center items-center">
+                  <SwiperSlide key={category?._id}>
+                    <Link
+                      href={`/products?filter=${category?.name}`}
+                      key={category?._id}
+                      className="text-center relative"
+                    >
+                      <div className="group cursor-pointer overflow-hidden w-[300px] h-[300px] rounded-xl mx-auto">
                         <Image
                           src={
-                            item?.attachment ??
+                            category?.attachment ??
                             "https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
                           }
-                          alt={item.name}
-                          width={260}
-                          height={260}
-                          className="group-hover:scale-110 duration-500 object-cover rounded-xl shadow-xl"
+                          alt={category?.name}
+                          width={300}
+                          height={300}
+                          className="group-hover:scale-110 duration-500 object-cover rounded-xl mx-auto"
                         />
                       </div>
+                      <h3
+                        className={`font-semibold text-xl absolute bottom-6 left-0 right-0 ${
+                          category?.attachment ? "text-white" : "text-primary"
+                        }`}
+                      >
+                        {category?.name}
+                      </h3>
                     </Link>
                   </SwiperSlide>
                 );

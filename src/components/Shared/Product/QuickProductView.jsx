@@ -61,7 +61,6 @@ const QuickProductView = ({
     }
   }, [selectedAttributes, item?.variants]);
 
-
   const currentPrice = currentVariant
     ? currentVariant?.sellingPrice
     : item?.offerPrice ?? item?.sellingPrice;
@@ -85,12 +84,7 @@ const QuickProductView = ({
         <div className="flex flex-col items-center justify-center lg:flex-row gap-10 pt-5">
           <div className="w-full">
             <Image
-              src={
-                currentImage ??
-                ["/products", "/wishlist", "/compare"].includes(pathname)
-                  ? item?.mainImage
-                  : formatImagePath(item?.mainImage)
-              }
+              src={currentImage}
               alt={item?.name}
               width={300}
               height={300}

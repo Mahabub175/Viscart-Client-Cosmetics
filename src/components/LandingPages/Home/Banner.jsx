@@ -36,6 +36,7 @@ const Banner = () => {
         }}
         slidesPerView={1}
         navigation
+        className="mySwiper max-h-[600px]"
       >
         {activeSliders?.map((item) => {
           return (

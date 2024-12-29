@@ -204,16 +204,16 @@ const LandingTopHeader = () => {
             height={50}
           />
         </Link>
-        <div className="hidden md:block relative">
-          <AutoComplete
-            options={options}
-            onSearch={handleSearch}
-            placeholder="Search for Products..."
-            size="large"
-            className="w-[30vw] lg:!w-[60vw]"
-          />
-          <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-primary text-xl" />
-        </div>
+      </div>
+      <div className="hidden md:flex flex-1 relative">
+        <AutoComplete
+          options={options}
+          onSearch={handleSearch}
+          placeholder="Search for Products..."
+          size="large"
+          className="w-full"
+        />
+        <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-primary text-xl" />
       </div>
       {routes}
       <div className="mt-10 md:mt-0 md:flex items-center gap-4 ">

@@ -67,7 +67,7 @@ const CategoryNavigation = ({ onClose }) => {
             <span>{parentCategory?.name}</span>
             {parentCategory?.categories &&
               parentCategory?.categories.length > 0 && (
-                <DownOutlined className="!text-sm" />
+                <DownOutlined className="!text-sm ml-1 mt-1" />
               )}
           </Link>
         </Dropdown>
@@ -104,7 +104,7 @@ const CategoryNavigation = ({ onClose }) => {
 
   return (
     <div className="lg:bg-primary py-3 lg:text-white lg:border-y">
-      <div className="container lg:px-5 mx-auto flex flex-col md:flex-row gap-5 items-start md:items-center">
+      <div className="container lg:px-5 mx-auto flex flex-col md:flex-row gap-5 items-start md:items-center justify-center">
         {renderParentCategories()}
         <span className="rotate-90 md:rotate-0">|</span>
         {routes}
