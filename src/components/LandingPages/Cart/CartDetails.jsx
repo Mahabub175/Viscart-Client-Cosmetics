@@ -3,6 +3,7 @@
 import deleteImage from "@/assets/images/Trash-can.png";
 import CustomForm from "@/components/Reusable/Form/CustomForm";
 import {
+  useGetSingleUserQuery,
   useLoginMutation,
   useSignUpMutation,
 } from "@/redux/services/auth/authApi";
@@ -36,6 +37,12 @@ const CartDetails = () => {
   const { data: cartData, isError } = useGetSingleCartByUserQuery(
     user?._id ?? deviceId
   );
+
+  const [number, setNumber] = useState(null);
+
+  const { data: userData } = useGetSingleUserQuery(number, {
+    skip: !number,
+  });
 
   const [deleteCart] = useDeleteCartMutation();
   const [deleteBulkCart] = useDeleteBulkCartMutation();
@@ -92,6 +99,8 @@ const CartDetails = () => {
           };
 
           const loginResponse = await login(loginData).unwrap();
+          console.log("Login successful:", loginResponse);
+
           if (loginResponse.success) {
             dispatch(
               setUser({
@@ -102,74 +111,73 @@ const CartDetails = () => {
           }
         } catch (error) {
           if (error?.data?.errorMessage === "number already exists") {
-            toast.error("Number already exists");
+            setNumber(values?.number);
           }
         }
       }
 
-      setTimeout(async () => {
-        try {
-          const submittedData = {
-            ...values,
-            user: signUpResponse?.data?._id ?? user?._id,
-            deviceId,
-            products: cartData?.map((item) => ({
-              product: item?.productId,
-              productName:
-                item?.productName +
-                (item?.variant &&
-                item?.variant?.attributeCombination?.length > 0
-                  ? ` (${item?.variant?.attributeCombination
-                      ?.map((combination) => combination?.name)
-                      .join(" ")})`
-                  : ""),
-              quantity: item?.quantity,
-              sku: item?.sku,
-            })),
-            shippingFee,
-            discount,
-            deliveryOption,
-            code,
-            grandTotal,
-            subTotal,
-          };
+      const finalUserId =
+        userData?._id || signUpResponse?.data?._id || user?._id;
 
-          if (values.paymentType === "cod") {
-            submittedData.paymentMethod = "cod";
-          }
+      if (!finalUserId) {
+        toast.error("Failed to retrieve user data. Please try again.", {
+          id: toastId,
+        });
+        return;
+      }
 
-          const data = new FormData();
-          appendToFormData(submittedData, data);
+      const submittedData = {
+        ...values,
+        user: finalUserId,
+        deviceId,
+        products: cartData?.map((item) => ({
+          product: item?.productId,
+          productName:
+            item?.productName +
+            (item?.variant && item?.variant?.attributeCombination?.length > 0
+              ? ` (${item?.variant?.attributeCombination
+                  ?.map((combination) => combination?.name)
+                  .join(" ")})`
+              : ""),
+          quantity: item?.quantity,
+          sku: item?.sku,
+        })),
+        shippingFee,
+        discount,
+        deliveryOption,
+        code,
+        grandTotal,
+        subTotal,
+      };
 
-          try {
-            const res = await addOrder(data);
+      if (values.paymentType === "cod") {
+        submittedData.paymentMethod = "cod";
+      }
 
-            if (res?.error) {
-              toast.error(res?.error?.data?.errorMessage, { id: toastId });
-            } else if (res?.data?.success) {
-              if (res?.data?.data?.gatewayUrl) {
-                window.location.href = res?.data?.data?.gatewayUrl;
-              }
-              toast.success(res.data.message, { id: toastId });
-              const cartIds = cartData?.map((item) => item._id);
-              await deleteBulkCart(cartIds);
-              router.push("/success");
-            }
-          } catch (error) {
-            toast.error("Something went wrong while creating Order!", {
-              id: toastId,
-            });
-            console.error("Error creating Order:", error);
-          }
-        } catch (error) {
-          toast.error("Something went wrong while creating Order!", {
-            id: toastId,
-          });
-          console.error("Error preparing Order data:", error);
+      const data = new FormData();
+      appendToFormData(submittedData, data);
+
+      console.log("Submitting order data:", submittedData);
+
+      const res = await addOrder(data);
+
+      if (res?.error) {
+        toast.error(res?.error?.data?.errorMessage, { id: toastId });
+      } else if (res?.data?.success) {
+        console.log("Order successfully created:", res.data);
+        if (res?.data?.data?.gatewayUrl) {
+          window.location.href = res?.data?.data?.gatewayUrl;
         }
-      }, 2000);
+        toast.success(res.data.message, { id: toastId });
+        const cartIds = cartData?.map((item) => item._id);
+        await deleteBulkCart(cartIds);
+        router.push("/success");
+      }
     } catch (error) {
-      toast.error("Error in order creation process!");
+      console.error("Error during order submission:", error);
+      toast.error("Something went wrong while creating Order!", {
+        id: toastId,
+      });
     }
   };
 

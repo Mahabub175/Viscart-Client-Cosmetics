@@ -84,7 +84,7 @@ const QuickViewHover = ({ item }) => {
           <AiOutlineFullscreen />
         </div>
       </Tooltip>
-      <span> | </span>
+      <span className="text-primary"> | </span>
       <Tooltip placement="top" title={"Add to Wishlist"}>
         <div
           className="text-sm cursor-pointer hover:scale-110 duration-300 p-1 hover:bg-primary text-primary hover:text-white rounded-full"
@@ -93,7 +93,7 @@ const QuickViewHover = ({ item }) => {
           <TbHeart />
         </div>
       </Tooltip>
-      <span> | </span>
+      <span className="text-primary"> | </span>
       <Tooltip placement="top" title={"Add to Compare"}>
         <div
           className="text-sm cursor-pointer hover:scale-110 duration-300 p-1 hover:bg-primary text-primary hover:text-white rounded-full"
