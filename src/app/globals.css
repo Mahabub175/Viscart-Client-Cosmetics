@@ -91,5 +91,5 @@
   @apply grid grid-cols-1 lg:grid-cols-3 gap-4;
 }
 .my-container {
-  @apply container mx-auto px-5;
+  @apply max-w-[1700px] mx-auto px-5;
 }

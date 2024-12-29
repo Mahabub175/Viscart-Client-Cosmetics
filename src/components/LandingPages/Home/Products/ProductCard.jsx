@@ -6,29 +6,53 @@ import { useGetAllGlobalSettingQuery } from "@/redux/services/globalSetting/glob
 import { formatImagePath } from "@/utilities/lib/formatImagePath";
 import { usePathname } from "next/navigation";
 import LinkButton from "@/components/Shared/LinkButton";
+import { toast } from "sonner";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "@/redux/services/auth/authSlice";
+import { useDeviceId } from "@/redux/services/device/deviceSlice";
+import { useAddCartMutation } from "@/redux/services/cart/cartApi";
 
 const ProductCard = ({ item }) => {
   const { data: globalData } = useGetAllGlobalSettingQuery();
   const pathname = usePathname();
   const [isHovered, setIsHovered] = useState(false);
 
+  const user = useSelector(useCurrentUser);
+  const deviceId = useSelector(useDeviceId);
+  const [addCart] = useAddCartMutation();
+
+  const addToCart = async () => {
+    const data = {
+      ...(user?._id ? { user: user._id } : { deviceId }),
+      product: item?._id,
+      quantity: 1,
+      sku: item?.sku,
+      price: item?.offerPrice ? item?.offerPrice : item?.sellingPrice,
+    };
+
+    const toastId = toast.loading("Adding to cart");
+
+    try {
+      const res = await addCart(data);
+      if (res?.data?.success) {
+        toast.success(res.data.message, { id: toastId });
+      }
+      if (res?.error) {
+        toast.error(res?.error?.data?.errorMessage, { id: toastId });
+      }
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+      toast.error("Failed to add item to cart.", { id: toastId });
+    }
+  };
+
   return (
     <div
-      className="border hover:border-primary duration-300 rounded-xl shadow-xl relative group w-[170px] h-[325px] lg:w-[230px] lg:h-[400px] mx-auto bg-white flex flex-col justify-between"
+      className="border rounded-xl shadow-xl relative group w-[250px] lg:w-[360px] h-[550px] mx-auto bg-white flex flex-col justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {item?.stock > 0 ? (
-        <div className="absolute top-2 left-2 p-2 bg-gradient-to-r from-green-500 to-green-700 text-white rounded font-bold text-[10px] z-10">
-          In Stock
-        </div>
-      ) : (
-        <div className="absolute top-2 left-2 p-1 bg-gradient-to-r from-red-500 to-red-700 text-white rounded font-bold text-[10px] z-10">
-          Out Of Stock
-        </div>
-      )}
-
-      <div className="relative overflow-hidden rounded-t-xl flex-shrink-0 h-[160px] lg:h-[200px]">
+      <div className="relative overflow-hidden rounded-t-xl flex-shrink-0 lg:h-[360px]">
         {item?.video && isHovered ? (
           <video
             src={formatImagePath(item?.video)}
@@ -50,32 +74,34 @@ const ProductCard = ({ item }) => {
                 : formatImagePath(item?.mainImage)
             }
             alt={item?.name}
-            width={230}
-            height={220}
-            className="rounded-t-xl h-[200px] object-cover group-hover:scale-110 duration-500"
+            width={360}
+            height={350}
+            className="rounded-t-xl w-[250px] lg:w-[360px] h-[350px] object-cover group-hover:scale-110 duration-500"
           />
         )}
-
-        <div className="hidden lg:block absolute inset-x-0 bottom-0 transform translate-y-full group-hover:translate-y-0 duration-500 z-10">
-          <QuickViewHover item={item} />
-        </div>
-      </div>
-      <div className="lg:hidden">
-        <QuickViewHover item={item} />
       </div>
 
       <div className="bg-white flex-grow">
         <div className="px-3 lg:p-5">
-          <div className="lg:flex justify-center items-center mb-2 gap-4 font-bold hidden">
-            <Rate disabled value={item?.ratings?.average} allowHalf />
+          <div className="flex flex-col justify-between items-center mb-2 gap-4">
+            <Rate
+              disabled
+              value={item?.ratings?.average}
+              allowHalf
+              style={{ fontSize: "12px" }}
+              className="mt-2 lg:mt-0"
+            />
+            <QuickViewHover item={item} />
           </div>
-          <Tooltip placement="top" title={item?.name}>
-            <h2 className="text-[14px] md:text-base text-center lg:font-semibold lg:mt-2 mb-6">
-              {item?.name.length > 40
-                ? item.name.slice(0, 40).concat("...")
-                : item.name}
-            </h2>
-          </Tooltip>
+          <LinkButton href={`/products/${item?.slug}`}>
+            <Tooltip placement="top" title={item?.name}>
+              <h2 className="text-[14px] md:text-base text-center lg:mt-2 mb-6">
+                {item?.name.length > 40
+                  ? item.name.slice(0, 40).concat("...")
+                  : item.name}
+              </h2>
+            </Tooltip>
+          </LinkButton>
           <div className="flex items-center gap-2 lg:gap-4 justify-center text-center">
             {item?.offerPrice && (
               <p className="text-sm lg:text-base font-bold line-through text-red-500">
@@ -90,11 +116,34 @@ const ProductCard = ({ item }) => {
           </div>
         </div>
       </div>
-      <LinkButton href={`/products/${item?.slug}`}>
-        <button className="bg-primary py-1 text-white w-full rounded-b-xl -mt-4">
-          Details
-        </button>
-      </LinkButton>
+
+      {item?.stock ? (
+        <div>
+          {item?.isVariant ? (
+            <LinkButton href={`/products/${item?.slug}`}>
+              <button className="bg-primary py-2 text-white w-full rounded-b-xl -mt-4">
+                Details
+              </button>
+            </LinkButton>
+          ) : (
+            <button
+              className="bg-primary text-white py-2 w-full rounded-b-xl -mt-4 cursor-pointer"
+              onClick={addToCart}
+            >
+              Add to Cart
+            </button>
+          )}
+        </div>
+      ) : (
+        <div>
+          <button
+            className="bg-grey text-red-500 py-2 w-full rounded-b-xl -mt-4"
+            disabled
+          >
+            Stock Out
+          </button>
+        </div>
+      )}
     </div>
   );
 };

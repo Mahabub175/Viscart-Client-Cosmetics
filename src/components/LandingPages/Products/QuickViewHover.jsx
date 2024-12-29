@@ -6,11 +6,10 @@ import { useAddCompareMutation } from "@/redux/services/compare/compareApi";
 import { useDeviceId } from "@/redux/services/device/deviceSlice";
 import { useAddWishlistMutation } from "@/redux/services/wishlist/wishlistApi";
 import { Tooltip } from "antd";
-import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineFullscreen } from "react-icons/ai";
 import { FaCodeCompare } from "react-icons/fa6";
-import { TbHeart, TbListDetails } from "react-icons/tb";
+import { TbHeart } from "react-icons/tb";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 
@@ -76,43 +75,33 @@ const QuickViewHover = ({ item }) => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-2 lg:gap-4 px-3 py-2 lg:py-4 bg-white">
+    <div className="flex items-center justify-center gap-2 px-4 bg-white border border-primary rounded-full">
       <Tooltip placement="top" title={"Quick View"}>
         <div
-          className="text-sm lg:text-xl cursor-pointer hover:scale-110 duration-300 p-1"
+          className="text-sm cursor-pointer hover:scale-110 duration-300 p-1 hover:bg-primary text-primary hover:text-white rounded-full"
           onClick={showModal}
         >
           <AiOutlineFullscreen />
         </div>
       </Tooltip>
-
-      <Tooltip placement="top" title={"Details"}>
-        <Link
-          href={`/products/${item?.slug}`}
-          className="text-sm lg:text-xl cursor-pointer hover:scale-110 duration-300 p-1"
-        >
-          <TbListDetails />
-        </Link>
-      </Tooltip>
-
+      <span> | </span>
       <Tooltip placement="top" title={"Add to Wishlist"}>
         <div
-          className="text-sm lg:text-xl cursor-pointer hover:scale-110 duration-300 p-1"
+          className="text-sm cursor-pointer hover:scale-110 duration-300 p-1 hover:bg-primary text-primary hover:text-white rounded-full"
           onClick={() => addToWishlist(item?._id)}
         >
           <TbHeart />
         </div>
       </Tooltip>
-
+      <span> | </span>
       <Tooltip placement="top" title={"Add to Compare"}>
         <div
-          className="text-sm lg:text-xl cursor-pointer hover:scale-110 duration-300 p-1"
+          className="text-sm cursor-pointer hover:scale-110 duration-300 p-1 hover:bg-primary text-primary hover:text-white rounded-full"
           onClick={() => addToCompare(item?._id)}
         >
           <FaCodeCompare className="rotate-90" />
         </div>
       </Tooltip>
-
       <QuickProductView
         item={item}
         isModalVisible={isModalVisible}

@@ -145,6 +145,7 @@ const ProductEdit = ({ open, setOpen, itemId }) => {
     );
 
     setContent(productData?.description);
+    setVideo(productData?.video);
   }, [productData]);
 
   return (
