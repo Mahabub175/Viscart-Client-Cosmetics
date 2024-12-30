@@ -74,22 +74,19 @@ const SingleProductDetails = ({ params }) => {
       setCurrentVariant(null);
       setVariantMedia([]);
     } else {
-      const updatedVariant = singleProduct?.variants.find((variant) =>
-        Object.entries(selectedAttributes).every(
-          ([attrName, selectedValue]) => {
-            return variant.attributeCombination.some(
-              (attr) =>
-                attr.attribute.name === attrName && attr.name === selectedValue
-            );
-          }
+      const updatedVariant = singleProduct?.variants?.find((variant) =>
+        Object.entries(selectedAttributes).every(([attrName, selectedValue]) =>
+          variant.attributeCombination.some(
+            (attr) =>
+              attr.attribute.name === attrName && attr.name === selectedValue
+          )
         )
       );
       setCurrentVariant(updatedVariant);
 
-      if (updatedVariant?.images) {
-        setVariantMedia(
-          updatedVariant.images.map((image) => formatImagePath(image))
-        );
+      if (updatedVariant?.images && Array.isArray(updatedVariant.images)) {
+        const validImages = updatedVariant.images.filter(Boolean);
+        setVariantMedia(validImages.map((image) => formatImagePath(image)));
       } else {
         setVariantMedia([]);
       }
@@ -98,7 +95,7 @@ const SingleProductDetails = ({ params }) => {
 
   const currentPrice = currentVariant
     ? currentVariant?.sellingPrice
-    : singleProduct?.sellingPrice;
+    : singleProduct?.offerPrice ?? singleProduct?.sellingPrice;
 
   const currentImage = selectedImage
     ? selectedImage
@@ -108,19 +105,27 @@ const SingleProductDetails = ({ params }) => {
 
   const allMedia =
     variantMedia.length > 0
-      ? [...variantMedia, singleProduct?.video ? "video-thumbnail" : null]
+      ? [
+          ...variantMedia,
+          singleProduct?.video ? "video-thumbnail" : null,
+        ].filter(Boolean)
       : [
-          formatImagePath(singleProduct?.mainImage) || null,
+          singleProduct?.mainImage
+            ? formatImagePath(singleProduct.mainImage)
+            : null,
           ...(Array.isArray(singleProduct?.images)
-            ? singleProduct?.images.map((image) => formatImagePath(image))
+            ? singleProduct.images.map((image) =>
+                image ? formatImagePath(image) : null
+              )
             : []),
           ...(Array.isArray(singleProduct?.variants)
-            ? singleProduct?.variants
-                ?.filter((variant) => variant.images)
-                ?.map((variant) =>
-                  variant.images.map((image) => formatImagePath(image))
-                )
-                .flat()
+            ? singleProduct.variants.flatMap((variant) =>
+                Array.isArray(variant.images)
+                  ? variant.images.map((image) =>
+                      image ? formatImagePath(image) : null
+                    )
+                  : []
+              )
             : []),
           singleProduct?.video ? "video-thumbnail" : null,
         ].filter(Boolean);

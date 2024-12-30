@@ -59,8 +59,8 @@ const AttributeOptionSelector = ({
                     {attributeName.toLowerCase() === "color" &&
                     variantWithImage?.image ? (
                       <Image
-                        src={formatImagePath(variantWithImage.image)}
-                        alt={option.name}
+                        src={formatImagePath(variantWithImage.image || "")}
+                        alt={option.name || "Color option"}
                         width={40}
                         height={40}
                         style={{
@@ -92,7 +92,7 @@ const AttributeOptionSelector = ({
                           height: "100%",
                         }}
                       >
-                        {option.label}
+                        {option.label || "N/A"}
                       </span>
                     )}
                   </div>

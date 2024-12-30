@@ -48,11 +48,11 @@ const ProductCard = ({ item }) => {
 
   return (
     <div
-      className="border rounded-xl shadow-xl relative group w-[300px] lg:w-[360px] h-[500px] md:h-[530px] lg:h-[560px] mx-auto bg-white flex flex-col justify-between"
+      className="border rounded-xl shadow-xl relative group w-[300px] lg:w-[360px] h-[500px] md:h-[530px] lg:h-[550px] mx-auto bg-white flex flex-col justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-t-xl flex-shrink-0 lg:h-[360px]">
+      <div className="relative overflow-hidden rounded-t-xl flex-shrink-0 lg:h-[350px]">
         {item?.video && isHovered ? (
           <video
             src={formatImagePath(item?.video)}
