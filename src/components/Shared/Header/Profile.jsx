@@ -72,7 +72,7 @@ const Profile = () => {
             alt="logo"
             height={40}
             width={40}
-            className="w-full h-12"
+            className="w-full h-full"
           />
         </Link>
       </div>

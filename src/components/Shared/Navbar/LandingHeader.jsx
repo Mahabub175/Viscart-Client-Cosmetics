@@ -202,7 +202,7 @@ const LandingHeader = () => {
 
   return (
     <header>
-      <nav className="-mb-[1px]">
+      <nav className="lg:-mb-[1px] -mt-2 lg:mt-0">
         {isMobile ? (
           <>
             {top}
@@ -222,7 +222,6 @@ const LandingHeader = () => {
                   alt="logo"
                   width={100}
                   height={100}
-                  className="w-full h-full"
                 />
               </Link>
               <div className="md:flex items-center gap-4 ">
@@ -282,13 +281,13 @@ const LandingHeader = () => {
                 onClose={onClose}
                 open={drawerVisible}
               >
-                <div className="flex items-center justify-between gap-4 mb-10">
+                <div className="flex items-center justify-between gap-4 -mt-5 mb-5">
                   <Link href={"/"}>
                     <Image
                       src={globalData?.results?.logo}
                       alt="logo"
-                      width={50}
-                      height={50}
+                      width={80}
+                      height={80}
                     />
                   </Link>
                   <button

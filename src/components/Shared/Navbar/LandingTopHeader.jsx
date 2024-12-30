@@ -194,15 +194,15 @@ const LandingTopHeader = () => {
   );
 
   return (
-    <div className="md:flex items-center justify-between container mx-auto gap-5 px-5 py-0 lg:py-2 xl:py-0">
+    <div className="md:flex items-center justify-between container mx-auto gap-5 px-5 py-0 -my-3">
       <div className="flex flex-col md:flex-row items-center gap-10">
         <Link href={"/"}>
           <Image
             src={globalData?.results?.logo ?? logo}
             alt="logo"
-            width={80}
-            height={50}
-            className="w-full h-full"
+            width={100}
+            height={100}
+            className="w-full h-[100px]"
           />
         </Link>
       </div>
