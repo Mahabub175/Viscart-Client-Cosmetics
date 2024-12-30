@@ -142,9 +142,9 @@ const SingleProductDetails = ({ params }) => {
   };
 
   return (
-    <section className="container mx-auto px-2 lg:px-5 lg:py-10">
+    <section className="container mx-auto px-2 py-5 lg:py-10">
       <div className="border-2 border-primary rounded-xl p-5 flex flex-col lg:flex-row items-center justify-center gap-10 mb-10 shadow-xl">
-        <div className="relative mx-auto flex flex-col lg:flex-row-reverse items-center lg:gap-10">
+        <div className="relative mx-auto flex flex-col lg:flex-row-reverse items-center lg:gap-5">
           <div className="relative mx-auto">
             {isVideoPlaying && singleProduct?.video ? (
               <video
@@ -204,7 +204,7 @@ const SingleProductDetails = ({ params }) => {
           </div>
         </div>
         <div className="lg:w-1/2 flex flex-col text-sm lg:text-base">
-          <h2 className="text-xl md:text-3xl font-medium mb-2">
+          <h2 className="text-xl md:text-2xl font-medium mb-2">
             {singleProduct?.name}
           </h2>
           <div className="flex items-center gap-2 mb-1">
@@ -253,16 +253,6 @@ const SingleProductDetails = ({ params }) => {
             fullWidth
             selectedPreviousAttributes={selectedAttributes}
           />
-          <div
-            className="w-full bg-primary px-10 py-2 text-xs lg:text-sm rounded-full shadow-xl mt-10 text-center text-white font-bold cursor-pointer"
-            onClick={handleWhatsappClick}
-          >
-            <p>Click To Place a Order With Just a Phone Call</p>
-            <div className="flex items-center justify-center gap-2 mt-1">
-              <FaWhatsapp className="text-2xl" />
-              <p>{businessWhatsapp}</p>
-            </div>
-          </div>
         </div>
       </div>
       <div className="border-2 border-primary rounded-xl p-5 mb-10 shadow-xl bg-white">
@@ -272,6 +262,16 @@ const SingleProductDetails = ({ params }) => {
         <div
           dangerouslySetInnerHTML={{ __html: singleProduct?.description }}
         ></div>
+        <div
+          className="w-full bg-primary px-10 py-2 text-xs lg:text-sm rounded-full shadow-xl mt-10 text-center text-white font-bold cursor-pointer"
+          onClick={handleWhatsappClick}
+        >
+          <p>Click To Place a Order With Just a Phone Call</p>
+          <div className="flex items-center justify-center gap-2 mt-1">
+            <FaWhatsapp className="text-2xl" />
+            <p>{businessWhatsapp}</p>
+          </div>
+        </div>
       </div>
       <div className="mt-20 bg-white rounded-xl shadow-xl p-5">
         {activeProducts && activeProducts.length > 0 ? (

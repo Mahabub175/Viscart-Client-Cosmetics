@@ -83,7 +83,7 @@ const LandingFooter = () => {
                   Subscribe
                 </Button>
               </Form>
-              <p className="mt-4 text-textColor font-medium lg:px-5 text-sm">
+              <p className="mt-4 text-textColor font-medium text-sm">
                 Subscribe to our Newsletter to receive early discount offers,
                 latest news, sales and promo information.
               </p>

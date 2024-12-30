@@ -65,8 +65,8 @@ const Brands = () => {
                           "https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
                         }
                         alt={item.name}
-                        width={340}
-                        height={340}
+                        width={300}
+                        height={300}
                         className="rounded-xl w-[160px] h-[160px] lg:w-[300px] lg:h-[300px]"
                       />
                     </div>
