@@ -220,8 +220,9 @@ const LandingHeader = () => {
                   src={globalData?.results?.logo}
                   priority
                   alt="logo"
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
+                  className="w-full h-full"
                 />
               </Link>
               <div className="md:flex items-center gap-4 ">

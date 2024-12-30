@@ -202,6 +202,7 @@ const LandingTopHeader = () => {
             alt="logo"
             width={80}
             height={50}
+            className="w-full h-full"
           />
         </Link>
       </div>
