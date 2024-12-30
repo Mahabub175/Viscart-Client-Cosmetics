@@ -148,7 +148,7 @@ const SinglePageCart = ({ params }) => {
     <section className="container mx-auto px-2 lg:px-5 lg:py-10">
       <div className="border-2 border-primary rounded-xl p-5 mb-10 shadow-xl">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-10 mb-10">
-          <div className="relative mx-auto flex flex-col lg:flex-row-reverse items-center lg:gap-10">
+          <div className="relative mx-auto flex flex-col lg:flex-row-reverse items-center lg:gap-5">
             <div className="relative mx-auto">
               {isVideoPlaying && singleProduct?.video ? (
                 <video
@@ -208,7 +208,7 @@ const SinglePageCart = ({ params }) => {
             </div>
           </div>
           <div className="lg:w-1/2 flex flex-col">
-            <h2 className="text-3xl lg:text-4xl font-medium mb-2">
+            <h2 className="text-xl md:text-3xl font-medium mb-2">
               {singleProduct?.name}
             </h2>
             <div className="flex items-center gap-2 mb-1">
