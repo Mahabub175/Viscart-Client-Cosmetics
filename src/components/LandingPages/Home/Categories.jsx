@@ -41,16 +41,15 @@ const Categories = () => {
                 className="group-hover:scale-110 duration-500 object-cover rounded-xl mx-auto"
               />
             </div>
-            <h3
-              className={`font-semibold text-xl absolute bottom-6 left-0 right-0 ${
-                category?.attachment ? "text-white" : "text-primary"
-              }`}
-            >
-              {category?.name}
-            </h3>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-3 rounded-b-xl">
+              <h3 className={`font-semibold text-xl text-center text-white`}>
+                {category?.name}
+              </h3>
+            </div>
           </Link>
         ))}
       </div>
+
       <div className="mt-10 md:hidden">
         {activeCategories?.length === 0 ? (
           <p className="text-center my-5">
