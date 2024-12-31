@@ -174,7 +174,7 @@ const SinglePageCart = ({ params }) => {
               )}
             </div>
 
-            <div className="flex flex-row lg:flex-col justify-start gap-2 mt-5 max-h-[400px] w-[300px] lg:w-auto border rounded-xl p-4 !overflow-x-auto lg:overflow-y-auto thumbnail">
+            <div className="flex flex-row lg:flex-col justify-start gap-2 mt-5 max-h-[400px] w-[300px] lg:w-auto xl:w-[147px] border rounded-xl p-4 !overflow-x-auto lg:overflow-y-auto thumbnail">
               {allMedia?.map((media, index) => (
                 <div
                   key={index}
@@ -304,8 +304,8 @@ const SinglePageCart = ({ params }) => {
           />
         </div>
       </div>
-      <div className="border-2 border-primary rounded-xl p-5 mb-10 shadow-xl bg-white flex flex-col items-center justify-center">
-        <div className="bg-primary mb-10 px-10 py-2 text-white font-bold rounded-xl inline-block">
+      <div className="border-2 border-primary rounded-xl p-5 mb-10 shadow-xl bg-white flex flex-col justify-start">
+        <div className="bg-primary mb-10 px-10 py-2 text-white font-bold rounded-xl">
           Description
         </div>
         <div
