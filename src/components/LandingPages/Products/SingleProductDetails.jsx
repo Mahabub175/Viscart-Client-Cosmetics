@@ -170,7 +170,7 @@ const SingleProductDetails = ({ params }) => {
             )}
           </div>
 
-          <div className="flex flex-row lg:flex-col justify-start gap-2 mt-5 max-h-[400px] w-[300px] lg:w-auto xl:w-[147px] border rounded-xl p-4 !overflow-x-auto lg:overflow-y-auto thumbnail">
+          <div className="flex flex-row lg:flex-col justify-start gap-2 mt-5 max-h-[400px] w-[300px] lg:w-auto xl:w-[142px] border rounded-xl p-4 !overflow-x-auto lg:overflow-y-auto thumbnail">
             {allMedia?.map((media, index) => (
               <div
                 key={index}
@@ -223,17 +223,9 @@ const SingleProductDetails = ({ params }) => {
           </div>
           <div className="flex items-center gap-4 text-textColor font-medium my-2">
             Price:{" "}
-            {singleProduct?.offerPrice ? (
-              <p className="text-primary text-xl">
-                {globalData?.results?.currency +
-                  " " +
-                  singleProduct?.offerPrice}
-              </p>
-            ) : (
-              <p className="text-primary text-xl">
-                {globalData?.results?.currency + " " + currentPrice}
-              </p>
-            )}
+            <p className="text-primary text-xl">
+              {globalData?.results?.currency + " " + currentPrice}
+            </p>
             {singleProduct?.offerPrice && (
               <p className="text-base line-through text-red-500">
                 {globalData?.results?.currency +
@@ -275,20 +267,18 @@ const SingleProductDetails = ({ params }) => {
           dangerouslySetInnerHTML={{ __html: singleProduct?.description }}
         ></div>
       </div>
-      <div className="mt-20 bg-white rounded-xl shadow-xl p-5">
-        {activeProducts && activeProducts.length > 0 ? (
-          <>
-            <h2 className="text-xl md:text-3xl font-medium text-center mb-10">
-              Similar Products
-            </h2>
-            <div className="flex flex-wrap gap-x-5 gap-y-8 lg:gap-y-14 pb-10">
-              {activeProducts.map((product) => (
-                <ProductCard key={product._id} item={product} />
-              ))}
-            </div>
-          </>
-        ) : null}
-      </div>
+      {activeProducts && activeProducts.length > 0 ? (
+        <div className="mt-20 bg-white rounded-xl shadow-xl p-5">
+          <h2 className="text-xl md:text-3xl font-medium text-center mb-10">
+            Similar Products
+          </h2>
+          <div className="flex flex-wrap gap-x-5 gap-y-8 lg:gap-y-14 pb-10">
+            {activeProducts.map((product) => (
+              <ProductCard key={product._id} item={product} />
+            ))}
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 };
