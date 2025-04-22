@@ -96,10 +96,10 @@ const GlobalCart = () => {
         ></div>
       )}
 
-      <div className="fixed bottom-[14%] lg:bottom-[17%] right-1 z-50">
+      <div className="fixed bottom-[18%] lg:bottom-[26%] xxl:bottom-[22%] right-1 z-50">
         <div
           onClick={toggleCart}
-          className="bg-primary text-white rounded-full w-14 h-14 flex items-center justify-center text-xl cursor-pointer"
+          className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center text-xl cursor-pointer"
         >
           {cartData?.length > 0 && !isError ? (
             <span className="relative">

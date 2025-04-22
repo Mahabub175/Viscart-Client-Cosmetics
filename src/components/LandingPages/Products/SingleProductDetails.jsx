@@ -18,7 +18,7 @@ import AttributeOptionSelector from "@/components/Shared/Product/AttributeOption
 
 const SingleProductDetails = ({ params }) => {
   const { data: globalData } = useGetAllGlobalSettingQuery();
-  const { data: singleProduct } = useGetSingleProductBySlugQuery(
+  const { data: singleProduct, isFetching } = useGetSingleProductBySlugQuery(
     params?.productId
   );
 
@@ -140,6 +140,14 @@ const SingleProductDetails = ({ params }) => {
       setSelectedImage(media);
     }
   };
+
+  if (isFetching) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
 
   return (
     <section className="container mx-auto px-2 py-5 lg:py-10">

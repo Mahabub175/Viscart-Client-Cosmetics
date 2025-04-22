@@ -143,6 +143,7 @@ const CartDetails = () => {
           sku: item?.sku,
         })),
         shippingFee,
+        paymentType: values?.paymentMethod,
         discount,
         deliveryOption,
         code,
