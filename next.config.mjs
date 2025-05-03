@@ -4,11 +4,7 @@ const nextConfig = {
     domains: [
       "localhost",
       "thumbs.dreamstime.com",
-      "viscartapi.devmahabub.com",
-      "anayase.com",
-      "shokhbazar.com",
-      "cosmeticsapi.kretaa.xyz",
-      "viscartdemoapi.vitasoftsolutions.com",
+      "rmsapi.moonsgallerysystem.com",
       "photohouseapi.photohousemagazine.com",
       "api.arshopsbd.com",
       "facebook.com",
