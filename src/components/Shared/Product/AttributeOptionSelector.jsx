@@ -15,15 +15,15 @@ const AttributeOptionSelector = ({
     <>
       {groupedAttributes &&
         Object.entries(groupedAttributes).map(([attributeName, options]) => (
-          <div key={attributeName} className="flex flex-col gap-2 my-2">
-            <span className="font-medium">{attributeName}:</span>
+          <div key={attributeName} className="flex items-center gap-2 my-2">
+            <span className="font-bold">{attributeName}:</span>
             <div className="flex flex-wrap items-center gap-2">
               {options.map((option) => {
                 const variantWithImage = item?.variants.find((variant) =>
                   variant.attributeCombination.some(
                     (attr) =>
-                      attr.attribute.name === attributeName &&
-                      attr.name === option.name
+                      attr?.attribute?.name === attributeName &&
+                      attr?.name === option?.name
                   )
                 );
 
@@ -59,8 +59,8 @@ const AttributeOptionSelector = ({
                     {attributeName.toLowerCase() === "color" &&
                     variantWithImage?.image ? (
                       <Image
-                        src={formatImagePath(variantWithImage.image || "")}
-                        alt={option.name || "Color option"}
+                        src={formatImagePath(variantWithImage.image)}
+                        alt={option.name}
                         width={40}
                         height={40}
                         style={{
@@ -92,7 +92,7 @@ const AttributeOptionSelector = ({
                           height: "100%",
                         }}
                       >
-                        {option.label || "N/A"}
+                        {option.label}
                       </span>
                     )}
                   </div>

@@ -5,11 +5,8 @@ import { LuSend } from "react-icons/lu";
 import { useState } from "react";
 import { useAddNewsletterMutation } from "@/redux/services/newsletter/newsletterApi";
 import { toast } from "sonner";
-import NewsLetter from "@/assets/images/svg/NewsLetter";
-import { useGetAllGlobalSettingQuery } from "@/redux/services/globalSetting/globalSettingApi";
 
 const NewsletterBanner = () => {
-  const { data: globalData } = useGetAllGlobalSettingQuery();
   const [email, setEmail] = useState("");
   const [addNewsletter, { isLoading }] = useAddNewsletterMutation();
 
@@ -34,42 +31,35 @@ const NewsletterBanner = () => {
   };
 
   return (
-    <section className="py-10 container mx-auto">
-      <div className="bg-white/80 rounded-xl w-full border flex items-center relative lg:h-[400px]">
-        <div className="px-10 space-y-3 py-10">
-          <h2 className="text-2xl lg:text-4xl font-bold lg:w-4/6">
-            Stay home & get your daily needs from our shop
-          </h2>
-          <p className="text-textColor pt-4 pb-2 lg:w-4/6">
-            Start Your Daily Shopping with our Shop
-          </p>
-          <Form
-            onFinish={onSubmit}
-            className="flex items-center w-full lg:w-3/6 relative"
+    <section className="mt-10 my-container flex flex-col lg:flex-row justify-between items-center gap-5">
+      <div className="text-center lg:text-start">
+        <h3 className="text-3xl font-bold mb-2">Newsletter</h3>
+        <p>Subscribe to get updates about our products.</p>
+      </div>
+      <div className="lg:px-10 space-y-3 pb-5 lg:py-10">
+        <Form
+          onFinish={onSubmit}
+          className="flex items-center lg:w-[450px] relative gap-2"
+        >
+          <Input
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            type="email"
+            size="large"
+            value={email}
+            className="rounded-xl px-10 py-4"
+            required
+          />
+          <LuSend className="text-xl absolute left-3" />
+          <Button
+            loading={isLoading}
+            htmlType="submit"
+            type="primary"
+            className="rounded-xl font-bold lg:px-10 py-7"
           >
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              type="email"
-              size="large"
-              value={email}
-              className="rounded-full px-10"
-              required
-            />
-            <LuSend className="text-xl absolute left-3" />
-            <Button
-              loading={isLoading}
-              htmlType="submit"
-              type="primary"
-              className="rounded-full absolute right-1 font-bold lg:px-10"
-            >
-              Subscribe
-            </Button>
-          </Form>
-        </div>
-        <div className="hidden lg:block absolute bottom-0 right-2">
-          <NewsLetter primaryColor={globalData?.results?.primaryColor} />
-        </div>
+            Subscribe
+          </Button>
+        </Form>
       </div>
     </section>
   );

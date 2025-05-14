@@ -53,7 +53,7 @@ const Categories = () => {
       <div className="mt-10 md:hidden">
         {activeCategories?.length === 0 ? (
           <p className="text-center my-5">
-            There is no brands available right now
+            There is no categories available right now
           </p>
         ) : (
           <div className="relative">

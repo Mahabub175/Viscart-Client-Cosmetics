@@ -96,10 +96,10 @@ const GlobalCart = () => {
         ></div>
       )}
 
-      <div className="fixed bottom-[18%] lg:bottom-[26%] xxl:bottom-[22%] right-1 z-50">
+      <div className="fixed bottom-[14%] lg:bottom-[17%] right-1 z-50">
         <div
           onClick={toggleCart}
-          className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center text-xl cursor-pointer"
+          className="bg-primary text-white rounded-full w-14 h-14 flex items-center justify-center text-xl cursor-pointer"
         >
           {cartData?.length > 0 && !isError ? (
             <span className="relative">
@@ -145,9 +145,9 @@ const GlobalCart = () => {
                         <div className="flex-1">
                           <Link href={`/products/${item?.slug}`}>
                             <Tooltip title={item.productName}>
-                              <h2 className="text-sm font-semibold">
-                                {item.productName.length > 40
-                                  ? `${item.productName.slice(0, 40)}...`
+                              <h2 className="text-sm font-medium">
+                                {item.productName.length > 35
+                                  ? `${item.productName.slice(0, 35)}...`
                                   : item.productName}{" "}
                                 {item?.variant &&
                                   ` (${item?.variant?.attributeCombination
@@ -190,7 +190,7 @@ const GlobalCart = () => {
                             </div>
                           </div>
                         </div>
-                        <p className="text-primary flex flex-1 text-base font-bold">
+                        <p className="text-primary flex text-base font-bold">
                           {globalData?.results?.currency +
                             " " +
                             item.price * item.localQuantity}
@@ -206,7 +206,7 @@ const GlobalCart = () => {
                       </div>
                     ))}
                     <hr className="border-primary mt-4" />
-                    <div className="text-center ml-10 font-bold text-primary mt-2">
+                    <div className="text-end ml-10 font-bold text-primary mt-2 mr-5">
                       Subtotal: {globalData?.results?.currency + " " + subTotal}
                     </div>
                   </div>

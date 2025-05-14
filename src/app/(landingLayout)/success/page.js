@@ -1,4 +1,3 @@
-import LoginButton from "@/components/LandingPages/Success/LoginButton";
 import SuccessAnimation from "@/components/LandingPages/Success/SuccessAnimation";
 import { Button } from "antd";
 import Link from "next/link";
@@ -15,7 +14,6 @@ const page = () => {
           Continue Shopping
         </Button>
       </Link>
-      <LoginButton />
     </div>
   );
 };

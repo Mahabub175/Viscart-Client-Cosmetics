@@ -4,9 +4,8 @@ const nextConfig = {
     domains: [
       "localhost",
       "thumbs.dreamstime.com",
+      "shokhbazar.com",
       "rmsapi.moonsgallerysystem.com",
-      "photohouseapi.photohousemagazine.com",
-      "api.arshopsbd.com",
       "facebook.com",
     ],
   },

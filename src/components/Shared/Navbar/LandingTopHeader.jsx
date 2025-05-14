@@ -1,4 +1,4 @@
-import logo from "@/assets/images/logo-white.png";
+import logo from "@/assets/images/logo.png";
 import { useGetSingleUserQuery } from "@/redux/services/auth/authApi";
 import { logout, useCurrentUser } from "@/redux/services/auth/authSlice";
 import { useGetSingleCartByUserQuery } from "@/redux/services/cart/cartApi";

@@ -2,34 +2,47 @@
 
 import { useGetAllProductsQuery } from "@/redux/services/product/productApi";
 import ProductCard from "./ProductCard";
+import Link from "next/link";
 
 const OfferProducts = () => {
   const { data: productData } = useGetAllProductsQuery();
 
   const activeProducts = productData?.results
-    ?.filter((item) => item?.status !== "Inactive")
-    ?.sort((a, b) => (b?.ratings?.average || 0) - (a?.ratings?.average || 0))
-    ?.slice(0, 8);
+    ?.filter(
+      (item) =>
+        item?.status !== "Inactive" && item?.offerPrice > 0 && item?.offerPrice
+    )
+    ?.slice(0, 14);
 
   return (
-    <div className="my-container bg-white shadow-xl py-10 rounded-xl mt-10">
-      <h2 className="text-xl md:text-3xl font-medium text-center mb-10">
-        Top Selling Products
-      </h2>
-      {activeProducts?.length > 0 ? (
-        <div className="flex flex-wrap gap-x-5 gap-y-8 lg:gap-y-14 pb-10">
-          {activeProducts?.map((product) => (
-            <ProductCard key={product?._id} item={product} />
-          ))}
-        </div>
-      ) : (
-        <div className="flex items-center justify-center my-10 bg-white p-10 rounded-xl shadow-xl">
-          <h2 className="lg:text-2xl font-bold text-black/80 text-center text-xl">
-            No top selling products available
+    <section className="my-container mt-10">
+      <div className="py-10">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-lg lg:text-3xl font-medium text-center lg:text-start">
+            Offer Products
           </h2>
+          <Link
+            href={`/offers`}
+            className="border-b border-primary font-semibold"
+          >
+            Show All
+          </Link>
         </div>
-      )}
-    </div>
+        {activeProducts?.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-wrap justify-center gap-5">
+            {activeProducts.map((product) => (
+              <div key={product?._id}>
+                <ProductCard item={product} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-sm text-gray-500">
+            No products available in this category.
+          </p>
+        )}
+      </div>
+    </section>
   );
 };
 

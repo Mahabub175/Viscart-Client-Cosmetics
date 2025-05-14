@@ -9,7 +9,7 @@ const CustomInput = ({
   required,
   prefix,
   placeholder,
-  disabled = false,
+  disabled,
 }) => {
   return (
     <Form.Item

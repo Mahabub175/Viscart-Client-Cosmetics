@@ -1,26 +1,41 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import { useGetAllSlidersQuery } from "@/redux/services/slider/sliderApi";
 import LinkButton from "@/components/Shared/LinkButton";
+import { sendGTMEvent } from "@next/third-parties/google";
+import { useAddServerTrackingMutation } from "@/redux/services/serverTracking/serverTrackingApi";
+import useGetURL from "@/utilities/hooks/useGetURL";
 
 const Banner = () => {
   const swiperRef = useRef();
-
   const { data: sliders } = useGetAllSlidersQuery();
 
+  const url = useGetURL();
+  const [addServerTracking] = useAddServerTrackingMutation();
+
+  useEffect(() => {
+    sendGTMEvent({ event: "PageView", value: url });
+    const data = {
+      event: "PageView",
+      data: {
+        event_source_url: url,
+      },
+    };
+    addServerTracking(data);
+  }, [url]);
+
   const activeSliders = sliders?.results?.filter(
-    (item) => item.status === "Active"
+    (item) => item.status === "Active" && !item?.bottomBanner
   );
 
   return (
-    <section className="relative mb-10">
+    <section className="relative lg:mb-10">
       <Swiper
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
@@ -37,6 +52,7 @@ const Banner = () => {
         slidesPerView={1}
         navigation
         className="mySwiper max-h-[600px]"
+        loop
       >
         {activeSliders?.map((item) => {
           return (
@@ -48,9 +64,9 @@ const Banner = () => {
                     "https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
                   }
                   alt={item?.name ?? "Demo"}
-                  width={2000}
-                  height={600}
-                  className="h-[150px] lg:h-fit w-full object-cover"
+                  width={2500}
+                  height={450}
+                  className="h-[200px] lg:h-fit w-full"
                 />
               </LinkButton>
             </SwiperSlide>

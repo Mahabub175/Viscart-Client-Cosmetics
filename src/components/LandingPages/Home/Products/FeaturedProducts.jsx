@@ -4,6 +4,7 @@ import { useGetAllGlobalSettingQuery } from "@/redux/services/globalSetting/glob
 import { useGetAllProductsQuery } from "@/redux/services/product/productApi";
 import { Rate, Tooltip } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,7 +13,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useRef } from "react";
 import { formatImagePath } from "@/utilities/lib/formatImagePath";
-import LinkButton from "@/components/Shared/LinkButton";
 
 const FeatureProduct = () => {
   const swiperRef = useRef(null);
@@ -93,7 +93,7 @@ const FeatureProduct = () => {
                         {slideProducts?.map((item) => (
                           <div
                             key={item._id}
-                            className="flex items-center gap-5 rounded-xl bg-white shadow-xl p-3 lg:h-[150px]"
+                            className="flex items-center gap-5 rounded-xl bg-white shadow-xl p-3 h-[150px]"
                           >
                             <Image
                               src={formatImagePath(item?.mainImage)}
@@ -102,9 +102,9 @@ const FeatureProduct = () => {
                               width={100}
                               className="rounded-xl"
                             />
-                            <LinkButton href={`/products/${item?.slug}`}>
+                            <Link href={`/products/${item?.slug}`}>
                               <Tooltip placement="top" title={item?.name}>
-                                <h2 className="text-start lg:font-semibold mt-2 mb-6">
+                                <h2 className="text-start font-semibold mt-2 mb-6">
                                   {item?.name.length > 40
                                     ? item.name.slice(0, 40).concat("...")
                                     : item.name}
@@ -128,20 +128,20 @@ const FeatureProduct = () => {
                                   </p>
                                 )}
                                 {item?.offerPrice ? (
-                                  <p className="text-primary text-sm  lg:text-2xl font-bold">
+                                  <p className="text-primary lg:text-2xl font-bold">
                                     {globalData?.results?.currency +
                                       " " +
                                       item?.offerPrice}
                                   </p>
                                 ) : (
-                                  <p className="text-primary text-sm  lg:text-2xl font-bold">
+                                  <p className="text-primary lg:text-2xl font-bold">
                                     {globalData?.results?.currency +
                                       " " +
                                       item?.sellingPrice}
                                   </p>
                                 )}
                               </div>
-                            </LinkButton>
+                            </Link>
                           </div>
                         ))}
                       </div>

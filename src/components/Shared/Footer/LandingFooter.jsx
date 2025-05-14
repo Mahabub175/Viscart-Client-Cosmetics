@@ -43,7 +43,7 @@ const LandingFooter = () => {
       <footer className="my-container py-10">
         <div className="grid md:grid-cols-3 lg:grid-cols-5 items-start justify-center">
           <ContactInfo globalData={globalData} />
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:gap-10 lg:col-span-3">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:gap-10 lg:col-span-4">
             {footerData?.map((item, i) => (
               <div key={i} className="mt-10 lg:mt-0">
                 <h3 className="text-2xl font-bold mb-6">{item?.title}</h3>
@@ -78,12 +78,12 @@ const LandingFooter = () => {
                   loading={isLoading}
                   htmlType="submit"
                   type="primary"
-                  className="rounded-full font-bold lg:px-10 mt-2 w-full mx-auto"
+                  className="rounded-full font-bold lg:px-10 mt-2 w-11/12 mx-auto"
                 >
                   Subscribe
                 </Button>
               </Form>
-              <p className="mt-4 text-textColor font-medium text-sm">
+              <p className="mt-4 text-textColor font-medium lg:px-5 text-sm">
                 Subscribe to our Newsletter to receive early discount offers,
                 latest news, sales and promo information.
               </p>
