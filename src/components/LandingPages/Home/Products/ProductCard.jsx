@@ -1,6 +1,5 @@
 import { Rate, Tooltip } from "antd";
 import Image from "next/image";
-import React, { useState } from "react";
 import QuickViewHover from "../../Products/QuickViewHover";
 import { useGetAllGlobalSettingQuery } from "@/redux/services/globalSetting/globalSettingApi";
 import { formatImagePath } from "@/utilities/lib/formatImagePath";
@@ -13,7 +12,6 @@ import { useAddCartMutation } from "@/redux/services/cart/cartApi";
 
 const ProductCard = ({ item }) => {
   const { data: globalData } = useGetAllGlobalSettingQuery();
-  const [isHovered, setIsHovered] = useState(false);
 
   const user = useSelector(useCurrentUser);
   const deviceId = useSelector(useDeviceId);
@@ -45,34 +43,15 @@ const ProductCard = ({ item }) => {
   };
 
   return (
-    <div
-      className="border rounded-xl shadow-xl relative group w-[300px] lg:w-[360px] h-[500px] md:h-[530px] lg:h-[550px] mx-auto bg-white flex flex-col justify-between"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="border rounded-xl shadow-xl relative group w-[300px] lg:w-[360px] h-[500px] md:h-[530px] lg:h-[550px] mx-auto bg-white flex flex-col justify-between">
       <div className="relative overflow-hidden rounded-t-xl flex-shrink-0 lg:h-[350px]">
-        {item?.video && isHovered ? (
-          <video
-            src={formatImagePath(item?.video)}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            autoPlay
-            muted
-            controls={false}
-            className="w-full h-full rounded-t-xl object-cover"
-          >
-            Your browser does not support the video tag.
-          </video>
-        ) : (
-          <Image
-            src={formatImagePath(item?.mainImage)}
-            alt={item?.name}
-            width={360}
-            height={350}
-            className="rounded-t-xl w-[300px] lg:w-[360px] h-[300px] lg:h-[350px] object-cover group-hover:scale-110 duration-500"
-          />
-        )}
+        <Image
+          src={formatImagePath(item?.mainImage)}
+          alt={item?.name}
+          width={360}
+          height={350}
+          className="rounded-t-xl w-[300px] lg:w-[360px] h-[300px] lg:h-[350px] object-cover group-hover:scale-110 duration-500"
+        />
       </div>
 
       <div className="bg-white flex-grow relative">
