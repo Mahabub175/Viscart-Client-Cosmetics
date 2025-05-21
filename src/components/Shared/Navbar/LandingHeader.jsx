@@ -133,7 +133,7 @@ const LandingHeader = () => {
               <p className="text-lg font-medium">{product?.name}</p>
               <p>
                 Price: $
-                {product?.offerPrice
+                {product?.offerPrice > 0
                   ? product?.offerPrice
                   : product?.sellingPrice}
               </p>

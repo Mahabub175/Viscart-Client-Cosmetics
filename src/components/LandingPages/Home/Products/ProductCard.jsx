@@ -23,7 +23,7 @@ const ProductCard = ({ item }) => {
       product: item?._id,
       quantity: 1,
       sku: item?.sku,
-      price: item?.offerPrice ? item?.offerPrice : item?.sellingPrice,
+      price: item?.offerPrice > 0 ? item?.offerPrice : item?.sellingPrice,
     };
 
     const toastId = toast.loading("Adding to cart");
@@ -75,7 +75,7 @@ const ProductCard = ({ item }) => {
             </Tooltip>
           </LinkButton>
           <div className="flex items-center gap-2 lg:gap-4 justify-center text-center absolute  bottom-2 md:bottom-4 left-0 right-0">
-            {item?.offerPrice && (
+            {item?.offerPrice > 0 && (
               <p className="text-base font-bold line-through text-red-500">
                 {globalData?.results?.currency + " " + item?.sellingPrice}
               </p>
@@ -83,7 +83,7 @@ const ProductCard = ({ item }) => {
             <p className="text-primary text-xl font-bold">
               {globalData?.results?.currency +
                 " " +
-                (item?.offerPrice || item?.sellingPrice)}
+                (item?.offerPrice > 0 ? item?.offerPrice : item?.sellingPrice)}
             </p>
           </div>
         </div>
