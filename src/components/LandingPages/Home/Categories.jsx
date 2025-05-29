@@ -8,14 +8,22 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
+import { useDispatch } from "react-redux";
+import { setFilter } from "@/redux/services/device/deviceSlice";
 
 const Categories = () => {
   const swiperRef = useRef();
+  const dispatch = useDispatch();
+
   const { data: categories } = useGetAllCategoriesQuery();
 
   const activeCategories = categories?.results?.filter(
     (item) => item?.status !== "Inactive"
   );
+
+  const itemClickHandler = (item) => {
+    dispatch(setFilter(item));
+  };
 
   return (
     <section className="py-10 relative my-container bg-white shadow-xl p-5 rounded-xl">
@@ -25,11 +33,14 @@ const Categories = () => {
       <div className="mt-10 hidden md:flex flex-wrap justify-center items-center gap-10 py-5">
         {activeCategories?.slice(0, 9).map((category) => (
           <Link
-            href={`/products?filter=${category?.name}`}
+            href={`/products`}
             key={category?._id}
             className="text-center relative"
           >
-            <div className="group cursor-pointer overflow-hidden w-[350px] h-[350px] rounded-xl mx-auto">
+            <div
+              className="group cursor-pointer overflow-hidden w-[350px] h-[350px] rounded-xl mx-auto"
+              onClick={() => itemClickHandler(category?.name)}
+            >
               <Image
                 src={
                   category?.attachment ??
@@ -80,11 +91,14 @@ const Categories = () => {
                 return (
                   <SwiperSlide key={category?._id}>
                     <Link
-                      href={`/products?filter=${category?.name}`}
+                      href={`/products`}
                       key={category?._id}
                       className="text-center relative"
                     >
-                      <div className="group cursor-pointer overflow-hidden w-[300px] h-[300px] rounded-xl mx-auto">
+                      <div
+                        className="group cursor-pointer overflow-hidden w-[300px] h-[300px] rounded-xl mx-auto"
+                        onClick={() => itemClickHandler(category?.name)}
+                      >
                         <Image
                           src={
                             category?.attachment ??

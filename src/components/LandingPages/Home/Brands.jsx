@@ -8,9 +8,12 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import { useGetAllBrandsQuery } from "@/redux/services/brand/brandApi";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setFilter } from "@/redux/services/device/deviceSlice";
 
 const Brands = () => {
   const swiperRef = useRef();
+  const dispatch = useDispatch();
 
   const { data: brands } = useGetAllBrandsQuery();
 
@@ -22,6 +25,10 @@ const Brands = () => {
     return (
       <p className="text-center">There is no brands available right now</p>
     );
+
+  const itemClickHandler = (item) => {
+    dispatch(setFilter(item));
+  };
 
   return (
     <section className="my-container bg-white shadow-xl p-5 rounded-xl mt-10">
@@ -57,8 +64,11 @@ const Brands = () => {
             {activeBrands?.map((item) => {
               return (
                 <SwiperSlide key={item?._id}>
-                  <Link href={`/products?filter=${item?.name}`}>
-                    <div className="group cursor-pointer rounded-xl mx-auto flex gap-20 justify-center items-center shadow-xl w-[160px] h-[160px] lg:w-[300px] lg:h-[300px]">
+                  <Link href={`/products`}>
+                    <div
+                      className="group cursor-pointer rounded-xl mx-auto flex gap-20 justify-center items-center shadow-xl w-[160px] h-[160px] lg:w-[300px] lg:h-[300px]"
+                      onClick={() => itemClickHandler(item?.name)}
+                    >
                       <Image
                         src={
                           item?.attachment ??

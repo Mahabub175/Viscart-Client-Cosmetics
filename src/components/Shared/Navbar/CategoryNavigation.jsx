@@ -1,22 +1,35 @@
 import { useGetAllCategoriesQuery } from "@/redux/services/category/categoryApi";
+import { setFilter } from "@/redux/services/device/deviceSlice";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import { Menu, Dropdown } from "antd";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 
 const CategoryNavigation = ({ onClose }) => {
+  const dispatch = useDispatch();
+
   const { data: categories } = useGetAllCategoriesQuery();
+
+  const itemClickHandler = (item) => {
+    if (item) {
+      dispatch(setFilter(item));
+    }
+  };
+
   const renderSubcategories = (category) => {
     if (category?.subcategories && category?.subcategories.length > 0) {
       return (
         <Menu>
           {category.subcategories.map((subCategory) => (
             <Menu.Item key={subCategory?._id}>
-              <Link href={`/products?filter=${subCategory?.name}`}>
-                {subCategory?.name}
-                {subCategory?.subcategories &&
-                  subCategory?.subcategories.length > 0 && (
-                    <RightOutlined className="ml-2" />
-                  )}
+              <Link href={`/products`}>
+                <span onClick={() => itemClickHandler(subCategory?.name)}>
+                  {subCategory?.name}
+                  {subCategory?.subcategories &&
+                    subCategory?.subcategories.length > 0 && (
+                      <RightOutlined className="ml-2" />
+                    )}
+                </span>
               </Link>
             </Menu.Item>
           ))}
@@ -33,12 +46,11 @@ const CategoryNavigation = ({ onClose }) => {
           <Menu.SubMenu
             key={category?._id}
             title={
-              <Link
-                href={`/products?filter=${category?.name}`}
-                className="flex items-center"
-              >
-                {category?.name}
-              </Link>
+              <p onClick={() => itemClickHandler(category?.name)}>
+                <Link href={`/products`} className="flex items-center">
+                  {category?.name}
+                </Link>
+              </p>
             }
           >
             {renderSubcategories(category)}
@@ -57,16 +69,18 @@ const CategoryNavigation = ({ onClose }) => {
           overlay={renderCategories(parentCategory)}
           trigger={["hover"]}
         >
-          <Link
-            href={`/products?filter=${parentCategory?.name}`}
-            className="flex items-center cursor-pointer"
-          >
-            <span>{parentCategory?.name}</span>
-            {parentCategory?.categories &&
-              parentCategory?.categories.length > 0 && (
-                <DownOutlined className="!text-sm ml-1 mt-1" />
-              )}
-          </Link>
+          <span onClick={() => itemClickHandler(parentCategory?.name)}>
+            <Link
+              href={`/products`}
+              className="flex items-center cursor-pointer"
+            >
+              <span>{parentCategory?.name}</span>
+              {parentCategory?.categories &&
+                parentCategory?.categories.length > 0 && (
+                  <DownOutlined className="!text-sm ml-1 mt-1" />
+                )}
+            </Link>
+          </span>
         </Dropdown>
       ));
   };

@@ -26,7 +26,7 @@ import { useSelector } from "react-redux";
 const BottomNavigation = () => {
   const user = useSelector(useCurrentUser);
   const deviceId = useSelector(useDeviceId);
-  const { data } = useGetSingleUserQuery(user?._id);
+  const { data } = useGetSingleUserQuery(user?._id, { skip: !user?._id });
   const { data: compareData } = useGetSingleCompareByUserQuery(
     user?._id ?? deviceId
   );
